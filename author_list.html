@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}All Authors{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1>Author List</h1>
+  {% if user.is_superuser %}<a class="btn btn-primary" href="{% url 'author_create' %}">Add Author</a>{% endif %}
+</div>
+{% if author_list %}
+  <div class="table-responsive"><table class="table table-bordered table-hover align-middle">
+    <thead><tr><th>Author</th><th>Born</th><th>Died</th>{% if user.is_superuser %}<th>Manage</th>{% endif %}</tr></thead>
+    <tbody>{% for author in author_list %}
+      <tr><td><a href="{{ author.get_absolute_url }}">{{ author.first_name }} {{ author.last_name }}</a></td><td>{{ author.date_of_birth|default:"—" }}</td><td>{{ author.date_of_death|default:"—" }}</td>
+      {% if user.is_superuser %}<td class="text-nowrap"><a class="btn btn-sm btn-outline-primary" href="{% url 'author_update' author.pk %}">Edit</a> <a class="btn btn-sm btn-outline-danger" href="{% url 'author_delete' author.pk %}">Delete</a></td>{% endif %}</tr>
+    {% endfor %}</tbody>
+  </table></div>
+{% else %}<p>There are no authors in the library.</p>{% endif %}
+{% endblock %}

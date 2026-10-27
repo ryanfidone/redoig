@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Available Copies{% endblock %}
+{% block content %}
+<h1>All Available Books</h1>
+{% if bookinstance_list %}
+  <div class="table-responsive"><table class="table table-bordered align-middle"><thead><tr><th>Book</th><th>Copy ID</th><th></th></tr></thead><tbody>
+  {% for bookinst in bookinstance_list %}<tr><td><a href="{% url 'book_detail' bookinst.book.pk %}">{{ bookinst.book.title }}</a></td><td>{{ bookinst.id }}</td><td><a class="btn btn-sm btn-primary" href="{% url 'loan_book_librarian' bookinst.id %}">Loan</a></td></tr>{% endfor %}
+  </tbody></table></div>
+{% else %}<p>There are no available book copies. Add a Book Instance with status “Available” in the admin.</p>{% endif %}
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Home · Local Library{% endblock %}
+{% block content %}
+<section class="p-4 p-md-5 mb-4 rounded-3 hero">
+  <div class="col-lg-8 px-0">
+    <h1 class="display-5 fw-bold">Welcome to the Local Library</h1>
+    <p class="lead">Explore the catalogue, discover authors, and keep track of your borrowed books.</p>
+    <a class="btn btn-primary btn-lg" href="{% url 'book_list' %}">Browse books</a>
+  </div>
+</section>
+<h2>Library at a glance</h2>
+<div class="row g-3">
+  <div class="col-6 col-lg"><div class="stat-card"><strong>{{ num_books }}</strong><span>Titles</span></div></div>
+  <div class="col-6 col-lg"><div class="stat-card"><strong>{{ num_instances }}</strong><span>Copies</span></div></div>
+  <div class="col-6 col-lg"><div class="stat-card"><strong>{{ num_instances_available }}</strong><span>Available copies</span></div></div>
+  <div class="col-6 col-lg"><div class="stat-card"><strong>{{ num_authors }}</strong><span>Authors</span></div></div>
+  <div class="col-6 col-lg"><div class="stat-card"><strong>{{ num_genres }}</strong><span>Genres</span></div></div>
+</div>
+{% endblock %}

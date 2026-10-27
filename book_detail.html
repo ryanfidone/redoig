@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}{{ book.title }}{% endblock %}
+{% block content %}
+<a class="btn btn-outline-secondary btn-sm mb-3" href="{% url 'book_list' %}">← Back to books</a>
+<div class="row g-4">
+  {% if book.book_image %}<div class="col-md-4"><img class="detail-image" src="{{ book.book_image.url }}" alt="Cover of {{ book.title }}"></div>{% endif %}
+  <div class="col">
+    <h1>{{ book.title }}</h1>
+    <p><strong>Author:</strong> {% if book.author %}<a href="{{ book.author.get_absolute_url }}">{{ book.author }}</a>{% else %}Unknown{% endif %}</p>
+    <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+    <p><strong>Genres:</strong> {{ book.display_genre|default:"—" }}</p>
+    <h2>Summary</h2><p>{{ book.summary|default:"No summary provided."|linebreaks }}</p>
+    {% if user.is_superuser %}<a class="btn btn-primary" href="{% url 'book_update' book.pk %}">Edit book</a>{% endif %}
+  </div>
+</div>
+<hr>
+<h2>Copies</h2>
+{% with copies=book.instances.all %}
+  {% if copies %}
+    <ul class="list-group">{% for copy in copies %}<li class="list-group-item d-flex justify-content-between"><span>{{ copy.get_status_display }}{% if copy.status == "o" and copy.due_back %} · due {{ copy.due_back }}{% endif %}</span><span class="{% if copy.is_overdue %}text-danger fw-bold{% endif %}">{{ copy.id }}</span></li>{% endfor %}</ul>
+  {% else %}<p>No Copies Available</p>{% endif %}
+{% endwith %}
+{% endblock %}

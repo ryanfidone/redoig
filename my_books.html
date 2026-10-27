@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}My Books{% endblock %}
+{% block content %}
+<h1>My Borrowed Books</h1>
+{% if bookinstance_list %}
+  <ul class="list-group">{% for bookinst in bookinstance_list %}
+    <li class="list-group-item {% if bookinst.is_overdue %}list-group-item-danger{% endif %}">
+      <a href="{% url 'book_detail' bookinst.book.pk %}">{{ bookinst.book.title }}</a>
+      — due {{ bookinst.due_back|default:"date not set" }}
+      {% if bookinst.is_overdue %}<strong>(Overdue)</strong>{% endif %}
+    </li>
+  {% endfor %}</ul>
+{% else %}<p>You do not currently have any books on loan.</p>{% endif %}
+{% endblock %}

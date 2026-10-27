@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}{% if object %}Edit Book{% else %}Add Book{% endif %}{% endblock %}
+{% block content %}
+<h1>{% if object %}Edit Book{% else %}Add Book{% endif %}</h1>
+<form method="post" enctype="multipart/form-data" class="form-card">
+  {% csrf_token %}{{ form|crispy }}
+  <button class="btn btn-primary" type="submit">Save book</button>
+  <a class="btn btn-outline-secondary" href="{% url 'book_list' %}">Cancel</a>
+</form>
+{% endblock %}

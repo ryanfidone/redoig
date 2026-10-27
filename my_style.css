@@ -1,0 +1,14 @@
+/* Assignment custom CSS plus responsive polish */
+:root { --library-ink: #1f2937; --library-accent: #2457a7; }
+body { color: var(--library-ink); background: #f8fafc; }
+h1 { color: blue; font-family: Arial, sans-serif; font-size: 1.6rem; font-weight: 700; margin-top: 0; margin-bottom: 1rem; }
+h2 { font-size: 1.25rem; margin-top: 1.25rem; }
+a { text-underline-offset: 2px; }
+.hero { background: linear-gradient(135deg, #e5efff, #f1f5f9); border: 1px solid #dbe5f3; }
+.stat-card { height: 100%; padding: 1.1rem; border: 1px solid #dbe3ee; border-radius: .75rem; background: white; display: flex; flex-direction: column; gap: .25rem; }
+.stat-card strong { font-size: 1.8rem; color: var(--library-accent); }
+.stat-card span { color: #64748b; }
+.detail-image { max-width: 100%; max-height: 420px; object-fit: contain; border-radius: .5rem; }
+.form-card { max-width: 760px; padding: 1.25rem; background: white; border: 1px solid #e2e8f0; border-radius: .75rem; }
+.table { background: white; }
+footer { text-align: center; }
